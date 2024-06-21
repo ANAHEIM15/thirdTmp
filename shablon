@@ -1,0 +1,65 @@
+from abc import ABC, abstractmethod
+
+class DataMiner(ABC):
+    def mine(self, path: str):
+        self.open_file(path)
+        data = self.extract_data()
+        self.parse_data(data)
+        self.analyze_data()
+        self.close_file()
+    
+    def open_file(self, path: str):
+        print(f"Opening file {path}")
+    
+    def close_file(self):
+        print("Closing file")
+
+    @abstractmethod
+    def extract_data(self):
+        pass
+
+    @abstractmethod
+    def parse_data(self, data):
+        pass
+    
+    def analyze_data(self):
+        print("Analyzing data")
+
+class PDFDataMiner(DataMiner):
+    def extract_data(self):
+        print("Extracting data from PDF")
+        return "PDF data"
+    
+    def parse_data(self, data):
+        print(f"Parsing {data}")
+
+class CSVDataMiner(DataMiner):
+    def extract_data(self):
+        print("Extracting data from CSV")
+        return "CSV data"
+    
+    def parse_data(self, data):
+        print(f"Parsing {data}")
+
+class JSONDataMiner(DataMiner):
+    def extract_data(self):
+        print("Extracting data from JSON")
+        return "JSON data"
+    
+    def parse_data(self, data):
+        print(f"Parsing {data}")
+
+
+if __name__ == "__main__":
+    pdf_miner = PDFDataMiner()
+    pdf_miner.mine("file.pdf")
+    
+    print()
+    
+    csv_miner = CSVDataMiner()
+    csv_miner.mine("file.csv")
+    
+    print()
+    
+    json_miner = JSONDataMiner()
+    json_miner.mine("file.json")
